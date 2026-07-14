@@ -173,9 +173,6 @@ body {
   inset: 0;
   z-index: 200;
   background: oklch(12% 0.02 260);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
@@ -184,18 +181,6 @@ body {
 body.is-loading .hero__loader {
   opacity: 1;
   visibility: visible;
-}
-.hero__loader-text {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(1.5rem, 2.4vw, 2.25rem);
-  letter-spacing: 0.18em;
-  color: oklch(85% 0.14 40);
-  text-transform: uppercase;
-  animation: loader-pulse 1.6s ease-in-out infinite;
-}
-@keyframes loader-pulse {
-  0%, 100% { opacity: 0.45; }
-  50%      { opacity: 1; }
 }
 
 /* ===== REDUCED MOTION ===== */
@@ -588,11 +573,10 @@ body.is-loading .hero__loader {
    would see an empty work section forever. */
 @media (prefers-reduced-motion: reduce) {
   .cta-arrow { animation: none !important; }
-  /* Reduced-motion users skip the loader pulse + opacity transition
+  /* Reduced-motion users skip the loader opacity-fade transition
      to honor their motion preference. The loader still shows/hides
-     based on `.is-loading`, just without a fade or pulse. */
-  .hero__loader,
-  .hero__loader-text { transition: none !important; animation: none !important; }
+     based on `.is-loading`, just without a fade. */
+  .hero__loader { transition: none !important; }
   /* .about__headshot's CSS default is `transform: scale(1.15)` —
      the starting state for the cinematic reveal animation. When
      reduced-motion is ON the cinematic never runs, so without this
