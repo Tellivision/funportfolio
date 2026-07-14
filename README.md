@@ -23,13 +23,13 @@ Open `http://localhost:8000`. The page works just as well opened as `file://` si
 
 ## Deploy to Vercel
 
-**Zero config required.** Vercel auto-detects this as a static site because the project root contains `index.html` and there is no `package.json` or framework override. Just:
+Vercel auto-detects this as a static site. A small `vercel.json` is committed to pin the framework and output directory explicitly — without it Vercel's auto-detection can fail to find the root `index.html` when a `public/` asset folder is present, returning a 404 on the deployment URL. Just:
 
 1. Push this repo to GitHub (the initial push is in `git log`).
 2. In Vercel, "Import Project" → select this repo.
 3. Vercel will detect "Other" framework and serve `index.html` at the root. Click **Deploy**.
 
-No build command, no output directory override, no env vars, no `vercel.json` needed. The first deploy should take under 30 seconds. See [Vercel docs on static deployments](https://vercel.com/docs/concepts/deployments/static-deployments) for the auto-detection rules.
+The committed `vercel.json` sets `framework: null`, `buildCommand: null`, `outputDirectory: "."` so no project-settings tweaking is needed. No env vars. The first deploy should take under 30 seconds. See [Vercel docs on static deployments](https://vercel.com/docs/concepts/deployments/static-deployments) for the auto-detection rules.
 
 Optional: connect a custom domain under Vercel → Project → Domains.
 
@@ -40,6 +40,7 @@ Optional: connect a custom domain under Vercel → Project → Domains.
 ├── AGENTS.md       # how the AI coding agent should behave on this project
 ├── HANDOFF.md      # historical session-by-session notes (kept for context)
 ├── README.md       # this file
+├── vercel.json     # pins Vercel to static + `outputDirectory: "."`
 ├── index.html      # entry point
 ├── hero.css        # all styles (~15 KB)
 ├── hero.js         # all GSAP animations (~8 KB)
