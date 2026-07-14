@@ -1,0 +1,24 @@
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+nul
+
+# Env / secrets (keep .env.example tracked via the ! line below)
+.env
+.env.*
+!.env.example
+
+# Node / build outputs (future-proof — Vercel auto-ignores these anyway)
+node_modules/
+dist/
+.vercel/

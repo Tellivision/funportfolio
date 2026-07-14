@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Go To Web</title>
+  <!-- Fonts: preconnect + display swap is the cheapest LCP win for the
+       Bebas Neue display type throughout the hero, about heading, and
+       gallery bento titles. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="hero.css" />
+  <!-- Scripts: GSAP + hero.js all `defer`-loaded from <head>. The browser
+       starts fetching them in parallel with HTML parse and runs them in
+       order before DOMContentLoaded. Saves one round-trip vs the
+       previous end-of-body placement on first visits / cold cache. -->
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/ScrollTrigger.min.js"></script>
+  <script defer src="hero.js"></script>
+</head>
+<body>
+
+  <div class="mask-overlay">
+    <div class="mask-panel mask-panel--top"></div>
+    <div class="mask-panel mask-panel--bottom"></div>
+  </div>
+
+  <main class="scroll-stage">
+  <section class="hero">
+    <!-- Hero video: preload="metadata" instead of the default "auto" so
+         the browser doesn't speculatively stream the entire ~12MB mp4
+         before user intent. fetchpriority="high" because the video (or
+         text title beside it) is the LCP candidate. -->
+    <video class="hero__video" src="public/hero.mp4" muted playsinline preload="metadata" fetchpriority="high"></video>
+
+    <div class="hero__content">
+      <div class="hero__left">
+        <!-- Above-the-fold image: explicit width/height attrs prevent
+             layout shift on load. decoding="async" off the main thread.
+             fetchpriority="high" pairs with the video for LCP. -->
+        <img class="hero__logo" src="public/logo.png" alt="Go To Web" width="180" height="180" decoding="async" fetchpriority="high" />
+        <div class="hero__tagline">I design the web.<br />You own the result.</div>
+        <a href="#work" class="hero__cta">See Our Work <span class="cta-arrow">&darr;</span></a>
+      </div>
+
+      <div class="hero__right">
+        <h1 class="hero__title" aria-label="Go To Web">
+          <span class="hero__title-line">Go</span>
+          <span class="hero__title-line">To</span>
+          <span class="hero__title-line accent">Web</span>
+        </h1>
+        <p class="hero__sub">Crafting digital experiences that move people — and move product.</p>
+      </div>
+    </div>
+
+    <div class="hero__scrim"></div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="about__bg"></div>
+    <div class="about__glow"></div>
+    <div class="about__inner">
+      <div class="about__image-col">
+        <div class="about__image-wrap">
+          <img class="about__headshot" src="public/headshot.png" alt="Founder of Go To Web" width="500" height="500" decoding="async" />
+        </div>
+      </div>
+
+      <div class="about__text-col">
+        <span class="about__label">The Person Behind the Pixels</span>
+        <h2 class="about__heading">Building brands that<br /><span class="accent">actually convert.</span></h2>
+        <div class="about__body-wrap">
+          <p class="about__body">
+            I'm the founder of Go To Web — a one-person studio obsessed with crafting
+websites that don't just look great, but work. Every pixel, every interaction,
+      is intentional. I partner with founders, startups, and
+        established brands who refuse to settle for generic templates.
+      </p>
+      </div>
+      <div class="about__body-wrap">
+        <p class="about__body">
+          With over a decade of design and development experience, I've helped businesses
+          turn their online presence into their most powerful asset. No fluff, no bloat —
+          just sharp design backed by solid engineering.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="gallery" id="work">
+    <div class="gallery__inner">
+      <div class="gallery__header">
+        <img class="gallery__work-img" src="public/work.png" alt="Selected work: Built to perform." width="2648" height="1508" loading="lazy" decoding="async" />
+      </div>
+
+      <div class="gallery__grid">
+        <article class="gallery__card gallery__card--hero">
+          <div class="gallery__card-media">
+            <img src="public/hero.png" alt="Nova Fintech" width="1825" height="862" loading="lazy" decoding="async" />
+            <div class="gallery__card-scrim"></div>
+            <div class="gallery__card-info">
+              <h3 class="gallery__card-title">Nova Fintech</h3>
+              <p class="gallery__card-category">Brand &amp; Web Design</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="gallery__card">
+          <div class="gallery__card-media">
+            <img src="public/headshot.png" alt="Pulse Health" width="500" height="500" loading="lazy" decoding="async" />
+            <div class="gallery__card-scrim"></div>
+            <div class="gallery__card-info">
+              <h3 class="gallery__card-title">Pulse Health</h3>
+              <p class="gallery__card-category">E-Commerce &amp; Identity</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="gallery__card">
+          <div class="gallery__card-media">
+            <img src="public/hero.png" alt="Arc Studio" width="1825" height="862" loading="lazy" decoding="async" />
+            <div class="gallery__card-scrim"></div>
+            <div class="gallery__card-info">
+              <h3 class="gallery__card-title">Arc Studio</h3>
+              <p class="gallery__card-category">Portfolio &amp; Motion</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="gallery__card">
+          <div class="gallery__card-media">
+            <img src="public/headshot.png" alt="Lumina AI" width="500" height="500" loading="lazy" decoding="async" />
+            <div class="gallery__card-scrim"></div>
+            <div class="gallery__card-info">
+              <h3 class="gallery__card-title">Lumina AI</h3>
+              <p class="gallery__card-category">SaaS Landing Page</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="gallery__card">
+          <div class="gallery__card-media">
+            <img src="public/hero.png" alt="Drift Coffee" width="1825" height="862" loading="lazy" decoding="async" />
+            <div class="gallery__card-scrim"></div>
+            <div class="gallery__card-info">
+              <h3 class="gallery__card-title">Drift Coffee</h3>
+              <p class="gallery__card-category">Local Brand &amp; Web</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="gallery__card">
+          <div class="gallery__card-media">
+            <img src="public/headshot.png" alt="Verge Logistics" width="500" height="500" loading="lazy" decoding="async" />
+            <div class="gallery__card-scrim"></div>
+            <div class="gallery__card-info">
+              <h3 class="gallery__card-title">Verge Logistics</h3>            <p class="gallery__card-category">Corporate Platform</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+  </main>
+
+</body>
+</html>
