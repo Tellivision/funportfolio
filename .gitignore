@@ -13,10 +13,9 @@ Thumbs.db
 *.log
 nul
 
-# Env / secrets (keep .env.example tracked via the ! line below)
+# Env / secrets. Add env templates here as needed in the future.
 .env
 .env.*
-!.env.example
 
 # Node / build outputs (future-proof — Vercel auto-ignores these anyway)
 node_modules/

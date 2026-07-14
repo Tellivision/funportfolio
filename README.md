@@ -25,11 +25,11 @@ Open `http://localhost:8000`. The page works just as well opened as `file://` si
 
 **Zero config required.** Vercel auto-detects this as a static site because the project root contains `index.html` and there is no `package.json` or framework override. Just:
 
-1. Push the repo (already done — see `git log`).
+1. Push this repo to GitHub (the initial push is in `git log`).
 2. In Vercel, "Import Project" → select this repo.
 3. Vercel will detect "Other" framework and serve `index.html` at the root. Click **Deploy**.
 
-No build command, no output directory override, no env vars. The first deploy should take under 30 seconds.
+No build command, no output directory override, no env vars, no `vercel.json` needed. The first deploy should take under 30 seconds. See [Vercel docs on static deployments](https://vercel.com/docs/concepts/deployments/static-deployments) for the auto-detection rules.
 
 Optional: connect a custom domain under Vercel → Project → Domains.
 
@@ -58,7 +58,3 @@ Optional: connect a custom domain under Vercel → Project → Domains.
 - All positioning, opacity, and z-index of the three sections are GSAP-owned via `gsap.set()` and `gsap.timeline`. CSS handles default flow for the reduced-motion / no-JS fallback.
 - `matchMedia('(prefers-reduced-motion: no-preference)')` gates the cinematic; reduced-motion users see all three sections stacked in document flow with no motion.
 - See `AGENTS.md` for the agent contract (lazy senior dev, minimum viable diff, no new dependencies).
-
-## License / owner
-
-Single-owner portfolio project. Source available for inspection; assets, copy, and design are not licensed for redistribution.
