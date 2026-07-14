@@ -324,9 +324,13 @@ body.is-loading .hero__loader {
     grid-template-columns: 1fr;
     text-align: center;
     gap: 2.5rem;
-    /* Lift body copy ~2rem up from the section bottom edge so it
-       doesn't pin to the bottom of the 100dvh pinned frame. */
-    padding-bottom: 2rem;
+    /* Lift body copy ~16px above the section's vertical center on
+       mobile (parent uses align-items: center, so increasing padding-
+       bottom grows the outer box and shifts content UP). The base
+       padding is clamp(4rem, 10vw, 12rem) = 64px on 375px; bumping
+       to 6rem (96px) clears the last paragraph away from the section
+       bottom edge in the 100dvh pinned frame. */
+    padding-bottom: 6rem;
   }
   .about__text-col { align-items: center; }
   .about__body-wrap .about__body { max-width: 100%; }
