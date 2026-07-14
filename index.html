@@ -21,6 +21,15 @@
 </head>
 <body>
 
+  <!-- Loading overlay: shown only while the hero video is buffering.
+       Sits at z-index 200 above the mask panels (z=100). JS toggles
+       the body's `is-loading` class when canplay fires (or 5s
+       fallback). Becomes inert for users without JS or for reduced-
+       motion paths (handled via the `visibility`/`opacity` defaults). -->
+  <div class="hero__loader" aria-hidden="true">
+    <span class="hero__loader-text">Loading…</span>
+  </div>
+
   <div class="mask-overlay">
     <div class="mask-panel mask-panel--top"></div>
     <div class="mask-panel mask-panel--bottom"></div>
@@ -32,7 +41,7 @@
          the browser doesn't speculatively stream the entire ~12MB mp4
          before user intent. fetchpriority="high" because the video (or
          text title beside it) is the LCP candidate. -->
-    <video class="hero__video" src="public/hero.mp4" muted playsinline preload="metadata" fetchpriority="high"></video>
+    <video class="hero__video" src="public/hero.mp4" muted playsinline preload="metadata" fetchpriority="high" autoplay></video>
 
     <div class="hero__content">
       <div class="hero__left">

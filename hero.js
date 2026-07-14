@@ -6,9 +6,13 @@
   // ---- Hero load timeline (time-based, fires on page load) ----
   // The mask panels slide apart, the video fades in behind the scrim,
   // and the hero content staggers up. Independent of scroll position.
+  // Timeline is created paused; we play() it below once the video is
+  // buffered enough (canplay fires) so the user never sees the mask
+  // reveal against an empty backdrop. Hard fallback at 5s in case
+  // canplay never fires (autoplay blocked, slow connection, etc).
   const heroTl = gsap.timeline({
     defaults: { ease: 'expo.out' },
-    delay: 0.3,
+    paused: true,
   });
 
   heroTl
@@ -54,7 +58,45 @@
       duration: 0.7,
     }, 1.4);
 
-  if (video) video.play().catch(() => {});
+  // Loading-screen coordination. We toggle the `.is-loading` class on
+  // <body> so the .hero__loader overlay (CSS-defined) shown while we
+  // wait for the video to buffer. Body tag is unclassed by default so
+  // no-JS users never see the loader (\u2014 they only get the static end
+  // state). JS users get the loader for the brief wait then the
+  // cinematic.
+  if (video) {
+    document.body.classList.add('is-loading');
+    // Try to start the video immediately. With `muted playsinline
+    // autoplay preload="metadata"` this almost always succeeds, but
+    // we silently swallow a rejection (some browsers gate without a
+    // user interaction).
+    video.play().catch(() => {});
+
+    let ready = false;
+    const kickOff = () => {
+      if (ready) return;
+      ready = true;
+      document.body.classList.remove('is-loading');
+      // Small delay so the loader's 0.5s opacity-fade completes before
+      // the mask panels begin their 1s reveal slide. Otherwise the two
+      // animations overlap and the user watches the masks slide apart
+      // over a still-fading-out loader.
+      setTimeout(() => heroTl.play(), 500);
+    };
+    // canplay fires when the first frame is ready to render \u2014 best
+    // signal for "ok to start the cinematic, the masks will reveal
+    // something". canplaythrough waits for ~80% buffered which is
+    // overkill while we have a loading screen to hold the user.
+    video.addEventListener('canplay', kickOff, { once: true });
+    // Fallback: never wait more than 5s. Slow connections or blocked
+    // autoplay would otherwise freeze the user at "Loading..."
+    // forever, which is worse than a slightly janky reveal.
+    setTimeout(kickOff, 5000);
+  } else {
+    // No video element at all \u2014 just play the cinematic immediately.
+    document.body.classList.remove('is-loading');
+    heroTl.play();
+  }
 
   // ---- Cinematic pinned stack (desktop + mobile, no reduced motion) ----
   // Four phases scrubbed by the scroll position of `.scroll-stage`
