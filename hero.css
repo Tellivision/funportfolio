@@ -191,10 +191,14 @@ body.is-loading .hero__loader {
 @media (max-width: 768px) {
   .hero__content {
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-    gap: 2rem;
-    padding: 1.5rem;
-    align-content: center;
+    /* Two auto rows + space-between distribution: row 1 (logo/tagline/
+       CTA) sits at the top, row 2 (title + paragraph) sits at the
+       bottom of the 100dvh hero, and the middle band stays clear so
+       the letterboxed hero video is not overlapped by text. */
+    grid-template-rows: auto auto;
+    gap: 0.5rem;
+    padding: 1.5rem 1.5rem 2rem;
+    align-content: space-between;
     justify-items: center;
     text-align: center;
   }
